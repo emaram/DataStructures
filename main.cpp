@@ -14,20 +14,17 @@ int main() {
 		
 		list.printList();
 	}
-	// list.printList();
-	// list.addFirst(3);
-	// list.printList();
-	// list.addLast(10);
-	// list.printList();
-	// list.addLast(11);
-	// list.printList();
-	// list.addLast(12);
-	// list.printList();
-	// list.addLast(13);
-	// list.printList();	
+	cout << "Now trying to add at pos 3. Please input val: ";
+	cin >> val;
+	list.insertNode(3, val);
+	list.printList();
+	cout << "Deleting 2 nodes ..." << endl;
 	list.deleteFirstNode();
 	list.printList();
 	list.deleteLastNode();
+	list.printList();
+	cout << "Clearing the list ..." << endl;
+	list.clearList();
 	list.printList();
 	return 0;
 }
