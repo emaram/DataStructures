@@ -20,11 +20,11 @@ public:
 
 	void addFirst(int value);
 	void addLast(int value);
-	void insertNode(int pos, int value);
+	void insertNode(unsigned int pos, int value);
 
 	unsigned int size() { return this->_size; }
 
-	int  getValue(int pos);
+	int  getValue(unsigned int pos);
 	void printList();
 
 	void clearList();

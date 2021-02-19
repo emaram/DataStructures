@@ -64,7 +64,7 @@ void SingleLinkedList::addLast(int value) {
 }
 
 // ========================================================
-void SingleLinkedList::insertNode(int pos, int value) {
+void SingleLinkedList::insertNode(unsigned int pos, int value) {
 	if (pos == 0) {
 		this->addFirst(value);
 		return;
@@ -92,18 +92,23 @@ void SingleLinkedList::insertNode(int pos, int value) {
 }
 
 // ========================================================
-int SingleLinkedList::getValue(int pos) {
+int SingleLinkedList::getValue(unsigned int pos) {
 	int retval = __INT_MAX__;
 	if (this->head == NULL)
 		return retval;
 	
+	if (pos == 0)
+		return this->head->value;
+	if (pos >= this->_size - 1)
+		return this->tail->value;
+	
+	// Traverse the list until the pos
 	Node* current = this->head;
-	while (pos-- > 0) {
-		if (current->next == NULL)
-			break;
+	while (--pos > 0) {
 		current = current->next;
 	}
-	retval = current->value;
+	// It is not the current node, but the next one
+	retval = current->next->value;
 	return retval;
 }
 

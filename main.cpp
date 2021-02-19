@@ -18,7 +18,8 @@ int main() {
 	cin >> val;
 	list.insertNode(3, val);
 	list.printList();
-	cout << "Deleting 2 nodes ..." << endl;
+	cout << "Node at pos 3 is " << list.getValue(3) << endl;
+ 	cout << "Deleting 2 nodes ..." << endl;
 	list.deleteFirstNode();
 	list.printList();
 	list.deleteLastNode();
