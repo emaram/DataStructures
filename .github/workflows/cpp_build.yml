@@ -16,5 +16,5 @@ jobs:
     - name: Build DataStruct binary
       run: make
     - name: Run DataStruct binary
-      run: DataStruct
+      run: ./DataStruct
 
