@@ -1,15 +1,15 @@
-CXX			:= g++
-CXXFLAGS	:= -std=gnu++14 -Wall
-OBJ_DIR		:= obj
-OBJECTS		:= $(OBJ_DIR)/main.o $(OBJ_DIR)/SingleLinkedList.o 
-TARGET		:= DataStruct_Test
+CXX := g++
+CXXFLAGS := -std=gnu++17 -Wall
+OBJ_DIR := obj
+OBJECTS := $(OBJ_DIR)/main.o $(OBJ_DIR)/SingleLinkedList.o 
+TARGET := DataStruct
 
 all: build $(TARGET)
 
 build:
 	@mkdir -p $(OBJ_DIR)
 
-sd: $(OBJECTS)
+$(TARGET): $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJECTS)
 
 $(OBJ_DIR)/%.o: %.cpp
@@ -21,5 +21,5 @@ debug: CXXFLAGS += -DDEBUG -g
 debug: all
 
 clean:
-	-@rm -f *.o $(OBJECTS) sd
+	-@rm -f *.o $(OBJECTS) sd DataStruct
 	-@rmdir $(OBJ_DIR)
