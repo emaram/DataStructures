@@ -13,6 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: make
+    - name: Build DataStruct binary
       run: make
+    - name: Run DataStruct binary
+      run: DataStruct
 
