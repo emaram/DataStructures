@@ -1,4 +1,6 @@
 sd
+DataStruct_Test
+.DS_Store
 *.o
 *.txt
 *.pages
