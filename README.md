@@ -12,12 +12,14 @@ In computer science, a linked list is a linear collection of data elements whose
 
 In a Single Linked List, a node is represented by its value, that could be of any type, and a pointer to the next node in the list.
 
-+-----+------+
-| val | next |
-+-----+------+
+| value | next | 
+|-------|------| 
 
 An example of Single Linked List could be the following:
-5 -> 8 -> 13 -> 2 -> NULL
+
+```
+5 -> 7 -> 12 -> 2 -> NULL
+```
 
 Two important nodes in the list are the first one (usually called head) and the last one (usually called tail). The tail will always point to NULL
 
