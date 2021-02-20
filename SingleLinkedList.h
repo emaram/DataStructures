@@ -4,6 +4,13 @@
 class SingleLinkedList {
 	
 private:
+	void init();
+
+protected:				
+	// Protected members accessible from child classes
+	// e.g. SortedSingleLinkedList will have access to head, tail and _size
+	//		but no access to private members
+
 	struct Node {
 		int value;
 		Node* next;
@@ -20,7 +27,7 @@ public:
 
 	void addFirst(int value);
 	void addLast(int value);
-	void insertNode(unsigned int pos, int value);
+	void addNodeAtPos(unsigned int pos, int value);
 
 	unsigned int size() { return this->_size; }
 
@@ -30,9 +37,6 @@ public:
 	void clearList();
 	void deleteFirstNode();
 	void deleteLastNode();
-
-private:
-	void init();
 
 };
 

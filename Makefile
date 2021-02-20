@@ -1,8 +1,10 @@
-CXX := g++
+CXX 	:= 	g++
 CXXFLAGS := -std=gnu++17 -Wall
-OBJ_DIR := obj
-OBJECTS := $(OBJ_DIR)/main.o $(OBJ_DIR)/SingleLinkedList.o 
-TARGET := DataStruct
+OBJ_DIR := 	obj
+OBJECTS := 	$(OBJ_DIR)/main.o \
+			$(OBJ_DIR)/SingleLinkedList.o \
+			$(OBJ_DIR)/SortedSingleLinkedList.o 
+TARGET 	:= 	DataStruct
 
 all: build $(TARGET)
 

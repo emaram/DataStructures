@@ -18,6 +18,7 @@ void SingleLinkedList::init() {
 	this->head = NULL;
 	this->tail = NULL;
 	this->_size = 0;
+	cout << "Init, all NULL ..." << endl;
 }
 
 // ========================================================
@@ -64,7 +65,7 @@ void SingleLinkedList::addLast(int value) {
 }
 
 // ========================================================
-void SingleLinkedList::insertNode(unsigned int pos, int value) {
+void SingleLinkedList::addNodeAtPos(unsigned int pos, int value) {
 	if (pos == 0) {
 		this->addFirst(value);
 		return;

@@ -1,49 +1,84 @@
 #include "SingleLinkedList.h"
+#include "SortedSingleLinkedList.h"
 #include <iostream>
 
 using namespace std;
 
 #define __TEST__
 
+void Test_SingleLinkedList() {
+	SingleLinkedList sll;
+	cout << "a) Generating 30 random values (0..100) ... " << endl;
+	cout << "   - value -> add first" << endl;
+	cout << "   - 2*value -> add last" << endl;
+	int val = 0, pos = 0;
+	for (int i = 0; i < 10; i++) {
+		val = rand() % 40;
+		sll.addFirst(val);
+		sll.addLast(2 * val);
+	}
+	sll.printList();
+
+	pos = rand() % 15;
+	val = rand() % 50;
+	cout << "b) Adding " << val << " at position " << pos << " ... " << endl;
+	sll.addNodeAtPos(pos, val);
+	sll.printList();
+	pos = rand() % 15;
+	val = rand() % 50;
+	cout << "c) Adding " << val << " at position " << pos << " ... " << endl;
+	sll.addNodeAtPos(pos, val);
+	sll.printList();
+	cout << "d) Removing last node ... " << endl;
+	sll.deleteLastNode();
+	sll.printList();
+	cout << "e) Removing first node ... " << endl;
+	sll.deleteFirstNode();
+	sll.printList();
+	cout << "f) Clearing the list ... " << endl;
+	sll.clearList();
+	sll.printList();
+}
+
+void Test_SortedSingleLinkedList(bool asc) {
+	SortedSingleLinkedList sll(asc);
+	cout << "a) Generating 30 random values (0..100) ... " << endl;
+	int val = 0;
+	for (int i = 0; i < 10; i++) {
+		val = rand() % 40;
+		sll.insertNode(val);
+	}
+	sll.printList();
+	val = rand() % 50;
+	cout << "b) Adding a new value: " << val << " ... " << endl;
+	sll.insertNode(val);
+	sll.printList();
+	cout << "c) Removing last node ... " << endl;
+	sll.deleteLastNode();
+	sll.printList();
+	cout << "d) Removing first node ... " << endl;
+	sll.deleteFirstNode();
+	sll.printList();
+	cout << "e) Clearing the list ... " << endl;
+	sll.clearList();
+	sll.printList();
+}
+
 int main() {
-	SingleLinkedList list;
-#ifdef __TEST__
-	int val = 0;
-	for (int i = 0; i < 30; i++) {
-		val = rand() % 45;
-		if (val % 3 == 0)
-			list.addFirst(val);
-		else if (val % 3 == 1)
-			list.addLast(val);
-		else
-			list.insertNode(2, val);
-		list.printList();
-	}
-#else
-	int val = 0;
-	while (val >= 0) {
-		cout << "Input val (0 or negative for exit): ";
-		cin >> val;
-		list.addFirst(val);
-		list.addLast(2*val);
-		
-		list.printList();
-	}
-	cout << "Now trying to add at pos 3. Please input val: ";
-	cin >> val;
-	list.insertNode(3, val);
-	list.printList();
-#endif
+	cout << "-----------------------------------------------------------" << endl;
+	cout << "Testing Single Linked List ..." << endl;
+	cout << "-----------------------------------------------------------" << endl;
+	Test_SingleLinkedList();
 
-	cout << "Node at pos 3 is " << list.getValue(3) << endl;
- 	cout << "Deleting 2 nodes ..." << endl;
-	list.deleteFirstNode();
-	list.printList();
-	list.deleteLastNode();
-	list.printList();
+	cout << "-----------------------------------------------------------" << endl;
+	cout << "Testing Sorted Single Linked List ... ASCENDING ..." << endl;
+	cout << "-----------------------------------------------------------" << endl;
+	Test_SortedSingleLinkedList(true);
 
-	cout << "Clearing the list ..." << endl;
-	list.clearList();
-	list.printList();
+	cout << "-----------------------------------------------------------" << endl;
+	cout << "Testing Sorted Single Linked List ... DESCENDING ..." << endl;
+	cout << "-----------------------------------------------------------" << endl;
+	Test_SortedSingleLinkedList(false);
+
 	return 0;
 }
