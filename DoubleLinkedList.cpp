@@ -1,20 +1,20 @@
-#include "SingleLinkedList.h"
+#include "DoubleLinkedList.h"
 #include <iostream>
 using namespace std;
 
 // ========================================================
-SingleLinkedList::SingleLinkedList() {
+DoubleLinkedList::DoubleLinkedList() {
 	this->init();
 }
 
 // ========================================================
-SingleLinkedList::SingleLinkedList(int value) {
+DoubleLinkedList::DoubleLinkedList(int value) {
 	this->init();
 	this->addFirst(value);
 }
 
 // ========================================================
-void SingleLinkedList::init() {
+void DoubleLinkedList::init() {
 	this->head = NULL;
 	this->tail = NULL;
 	this->_size = 0;
@@ -22,31 +22,32 @@ void SingleLinkedList::init() {
 }
 
 // ========================================================
-Node* SingleLinkedList::createNode(int value) {
+DoubleNode* DoubleLinkedList::createNode(int value) {
 	// Create node
-	Node* temp = new Node;
+	DoubleNode* temp = new DoubleNode;
 	temp->value = value;
 	temp->next = NULL;
+	temp->prev = NULL;
 
 	return temp;
 }
 
 // ========================================================
-SingleLinkedList::~SingleLinkedList() {
+DoubleLinkedList::~DoubleLinkedList() {
 	cout << "Destructor ..." << endl;
 	this->clearList();
 }
 
 // ========================================================
-void SingleLinkedList::addFirst(int value) {
-	Node* temp = this->createNode(value);
+void DoubleLinkedList::addFirst(int value) {
+	DoubleNode* temp = this->createNode(value);
 	if (this->_size == 0) {
 		// this is the very first node in the list
 		this->head = temp;
 		this->tail = temp;
 	}
 	else {
-		// insert before head
+		// insert before head ... temp->prev remains NULL
 		temp->next = this->head;
 		this->head = temp;
 	}
@@ -54,22 +55,23 @@ void SingleLinkedList::addFirst(int value) {
 }
 
 // ========================================================
-void SingleLinkedList::addLast(int value) {
-	Node* temp = this->createNode(value);
+void DoubleLinkedList::addLast(int value) {
+	DoubleNode* temp = this->createNode(value);
 	if (this->_size == 0) {
 		// this is the very first node in the list
 		this->head = temp;
 	}
 	else {
-		// add after tail
+		// add after tail ... temp->next remains NULL
 		this->tail->next = temp;
+		temp->prev = this->tail;
 	}
 	this->tail = temp;
 	this->_size ++;
 }
 
 // ========================================================
-void SingleLinkedList::addNodeAtPos(unsigned int pos, int value) {
+void DoubleLinkedList::addNodeAtPos(unsigned int pos, int value) {
 	if (pos == 0) {
 		this->addFirst(value);
 		return;
@@ -79,22 +81,23 @@ void SingleLinkedList::addNodeAtPos(unsigned int pos, int value) {
 		return;
 	}
 
-	Node* temp = this->createNode(value);
+	DoubleNode* temp = this->createNode(value);
 	
 	// Traverse the list until the pos
-	Node* current = this->head;
+	DoubleNode* current = this->head;
 	while (--pos > 0) {
 		current = current->next;
 	}
 
 	// Add the node after current
 	temp->next = current->next;
+	temp->prev = current;
 	current->next = temp;
 	this->_size++;
 }
 
 // ========================================================
-int SingleLinkedList::getValue(unsigned int pos) {
+int DoubleLinkedList::getValue(unsigned int pos) {
 	// int retval = __INT_MAX__;
 	if (this->head == NULL)
 		return __INT_MAX__;
@@ -103,7 +106,7 @@ int SingleLinkedList::getValue(unsigned int pos) {
 }
 
 // ========================================================
-Node* SingleLinkedList::getNode(unsigned int pos) {
+DoubleNode* DoubleLinkedList::getNode(unsigned int pos) {
 	if (this->head == NULL)
 		return NULL;
 	if (pos == 0)
@@ -112,7 +115,7 @@ Node* SingleLinkedList::getNode(unsigned int pos) {
 		return this->tail;
 
 	// Traverse the list until the pos
-	Node* current = this->head;
+	DoubleNode* current = this->head;
 	while (--pos > 0) {
 		current = current->next;
 	}
@@ -121,31 +124,34 @@ Node* SingleLinkedList::getNode(unsigned int pos) {
 }
 
 // ========================================================
-void SingleLinkedList::printList() {
+void DoubleLinkedList::printList() {
 	if (this->head == NULL) {
 		cout << "The list is empty" << endl;
 		return;
 	}
-	Node* temp = this->head;
+	cout << "NULL <-> ";
+	DoubleNode* temp = this->head;
 	while (temp != NULL) {
-		cout << temp->value << " -> ";
+		cout << temp->value << " <-> ";
 		temp = temp->next;
 	}
 	cout << "NULL" << endl;
 }
 
 // ========================================================
-void SingleLinkedList::clearList() {
+void DoubleLinkedList::clearList() {
 	while (this->head != NULL) {
 		this->deleteFirstNode();
 	}
 }
 
 // ========================================================
-void SingleLinkedList::deleteFirstNode() {
+void DoubleLinkedList::deleteFirstNode() {
 	if (this->head != NULL) {
-		Node* temp = this->head;
+		DoubleNode* temp = this->head;
 		this->head = this->head->next;
+		if (this->head != NULL)
+			this->head->prev = NULL;
 		delete temp;
 		temp = NULL;
 		if (this->_size > 0)
@@ -154,10 +160,10 @@ void SingleLinkedList::deleteFirstNode() {
 }
 
 // ========================================================
-void SingleLinkedList::deleteLastNode() {
+void DoubleLinkedList::deleteLastNode() {
 	if (this->tail != NULL) {
-		Node* temp = this->head;
-		Node* prev = temp;
+		DoubleNode* temp = this->head;
+		DoubleNode* prev = temp;
 		while (temp->next != NULL) {
 			prev = temp;
 			temp = temp->next;

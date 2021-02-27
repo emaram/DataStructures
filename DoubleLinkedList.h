@@ -1,31 +1,32 @@
-#ifndef __SINGLE_LINKED_LIST_H_
-#define __SINGLE_LINKED_LIST_H_
+#ifndef __DOUBLE_LINKED_LIST_H_
+#define __DOUBLE_LINKED_LIST_H_
 
-struct Node {
+struct DoubleNode {
 	int value;
-	Node* next;
+	DoubleNode* next;
+	DoubleNode* prev;
 };
 
 
-class SingleLinkedList {
+class DoubleLinkedList {
 	
 private:
 	void init();
-	Node* createNode(int value);
+	DoubleNode* createNode(int value);
 
 protected:				
 	// Protected members accessible from child classes
 	// e.g. SortedSingleLinkedList will have access to head, tail and _size
 	//		but no access to private members
 
-	Node* head;
-	Node* tail;			// optional, but useful
+	DoubleNode* head;
+	DoubleNode* tail;			// optional, but useful
 	unsigned int _size;	// useful for keeping the number of nodes
 
 public:
-	SingleLinkedList();
-	SingleLinkedList(int value);
-	~SingleLinkedList();
+	DoubleLinkedList();
+	DoubleLinkedList(int value);
+	~DoubleLinkedList();
 
 	void addFirst(int value);
 	void addLast(int value);
@@ -34,7 +35,7 @@ public:
 	unsigned int size() { return this->_size; }
 
 	int  getValue(unsigned int pos);
-	Node* getNode(unsigned int pos);
+	DoubleNode* getNode(unsigned int pos);
 	void printList();
 
 	void clearList();

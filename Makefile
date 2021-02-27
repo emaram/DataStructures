@@ -3,7 +3,8 @@ CXXFLAGS := -std=gnu++17 -Wall
 OBJ_DIR := 	obj
 OBJECTS := 	$(OBJ_DIR)/main.o \
 			$(OBJ_DIR)/SingleLinkedList.o \
-			$(OBJ_DIR)/SortedSingleLinkedList.o 
+			$(OBJ_DIR)/SortedSingleLinkedList.o \
+			$(OBJ_DIR)/DoubleLinkedList.o
 TARGET 	:= 	DataStruct
 
 all: build $(TARGET)
